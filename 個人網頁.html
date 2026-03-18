@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黃子芸 | Tzu-Yun Huang Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-ocean: #1a2a3a;      /* 深海藍黑 */
+            --wave-blue: #4a6fa5;       /* 海浪藍 */
+            --mist-blue: #b0c4de;       /* 薄霧藍 */
+            --sea-foam: #f0f4f8;        /* 海泡色 */
+            --white-glass: rgba(255, 255, 255, 0.95);
+        }
+
+        /* 全導覽平滑捲動 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--sea-foam);
+            background-image: linear-gradient(180deg, #fdfbfb 0%, #c3cfe2 100%);
+            background-attachment: fixed;
+            color: var(--deep-ocean);
+            font-family: 'Noto Serif TC', serif;
+            margin: 0;
+            padding: 100px 20px 80px 20px;
+            display: flex;
+            justify-content: center;
+            font-weight: 700; /* 全字體改為粗體 */
+            line-height: 1.8;
+        }
+
+        /* 導覽列 */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--mist-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 900; /* 按鍵用更粗體 */
+            font-size: 0.95em;
+            letter-spacing: 2px;
+            color: var(--deep-ocean);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--wave-blue);
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            background: var(--white-glass);
+            padding: 80px 60px;
+            border-radius: 4px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border-top: 8px solid var(--wave-blue);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 900; /* 姓名用極粗體 */
+            margin: 0;
+            letter-spacing: 0.3em;
+            color: var(--deep-ocean);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 20px;
+            letter-spacing: 0.2em;
+            color: var(--wave-blue);
+            font-weight: 700;
+        }
+
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px; /* 捲動補償，避免標題被導覽列遮住 */
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 900; /* 章節標題用極粗體 */
+            letter-spacing: 0.4em;
+            margin-bottom: 35px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--mist-blue);
+            display: block;
+        }
+
+        .content-text {
+            font-weight: 700;
+            text-align: justify;
+        }
+
+        .mbti-highlight {
+            border-left: 4px solid var(--wave-blue);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #2c3e50;
+        }
+
+        /* 列表樣式 */
+        .experience-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .experience-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .experience-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: var(--wave-blue);
+            font-size: 0.8em;
+            top: 2px;
+        }
+
+        /* 學習歷程 */
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            margin-bottom: 15px;
+            align-items: baseline;
+        }
+
+        .year {
+            color: var(--wave-blue);
+            font-weight: 900;
+        }
+
+        /* 攝影作品集 */
+        .photography-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .photo-frame {
+            aspect-ratio: 4 / 3;
+            background: #eef2f5;
+            overflow: hidden;
+            border: 1px solid var(--mist-blue);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-frame:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* 聯絡方式 */
+        .contact-area {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        a {
+            color: var(--deep-ocean);
+            text-decoration: none;
+            border-bottom: 2px solid var(--mist-blue);
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: var(--wave-blue);
+            border-bottom-color: var(--wave-blue);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 100px;
+            font-size: 0.9em;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            font-weight: 900;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { gap: 15px; font-size: 0.8em; }
+            .container { padding: 60px 30px; }
+            .photography-grid { grid-template-columns: 1fr; }
+            .timeline-row { grid-template-columns: 1fr; gap: 5px; }
+            h1 { font-size: 2.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="#about">關於我</a>
+            <a href="#education">學習歷程</a>
+            <a href="#experience">證照經歷</a>
+            <a href="#interest">個人興趣</a>
+            <a href="#gallery">攝影作品</a>
+            <a href="#contact">聯絡方式</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>黃子芸</h1>
+            <div class="subtitle">國立屏東科技大學 ‧ 工業管理系</div>
+        </header>
+
+        <section id="about">
+            <h2>關於我</h2>
+            <div class="content-text">
+                <div class="mbti-highlight">
+                    MBTI：INFJ-T<br>
+                    內向、天馬行空、情感細膩、運籌帷幄、情緒易波動。
+                </div>
+                <p>專注於生產排程、產線模擬與工廠辨識系統。在工業工程的嚴謹邏輯中，我始終保持對細節的敏銳觀察與感性思考，致力於在效率與人性化之間取得平衡。</p>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>學習歷程</h2>
+            <div class="content-text">
+                <div class="timeline-row"><span class="year">2022 - 現今</span><span>國立屏東科技大學 工業管理系</span></div>
+                <div class="timeline-row"><span class="year">2019 - 2022</span><span>三民家商 國際貿易科</span></div>
+                <div class="timeline-row"><span class="year">2016 - 2019</span><span>福山國中</span></div>
+                <div class="timeline-row"><span class="year">2010 - 2016</span><span>福山國小</span></div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>個人證照與得獎經歷</h2>
+            <div class="content-text">
+                <ul class="experience-list">
+                    <li>111 學年度勤學獎 第一名</li>
+                    <li>112 學年度勤學獎 第二名</li>
+                    <li>113 學年度勤學獎 第一名</li>
+                </ul>
+                <ul class="experience-list">
+                    <li>擔任 114 上學期「生產管理與實習」課程助教</li>
+                    <li>IPAS 智慧生產工程師 - 初級能力鑑定</li>
+                    <li>品質技術師證書</li>
+                    <li>2025 屏東航太產業認證培訓課程結業</li>
+                    <li>ACCESS 2016 實用級 Primary</li>
+                    <li>TQC - AutoCAD 專業設計人才認證</li>
+                </ul>
+            </div>
+        </section>
+
+       <section id="interest">
+            <h2>個人興趣</h2>
+            <div class="content-text">
+                影集欣賞 (韓劇、美劇) ‧ 流行文化追蹤 ‧ F1 賽車研究 ‧ 生活紀錄攝影
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>攝影作品</h2>
+            <div class="photography-grid">
+                <div class="photo-frame"><img src="圖片網址1" alt="Photography 1"></div>
+                <div class="photo-frame"><img src="圖片網址2" alt="Photography 2"></div>
+            </div>
+            <p style="text-align: right; font-size: 0.9em; margin-top: 25px;">
+                <a href="https://photos.app.goo.gl/2RPjHygTohqeQqYg6" target="_blank">View Full Gallery ↗</a>
+            </p>
+        </section>
+
+        <section id="contact">
+            <h2>聯絡方式</h2>
+            <div class="contact-area content-text">
+                <div>Email: <a href="mailto:socie0123@gmail.com">socie0123@gmail.com</a></div>
+                <div>Instagram: <a href="https://www.instagram.com/yunnnnn.0121" target="_blank">@yunnnnn.0121</a></div>
+            </div>
+        </section>
+
+        <footer>
+            HUANG TZU-YUN ‧ PROFESSIONAL PORTFOLIO ‧ 2026
+        </footer>
+    </div>
+
+</body>
+</html>
